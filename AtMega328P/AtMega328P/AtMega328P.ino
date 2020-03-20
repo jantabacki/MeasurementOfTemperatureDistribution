@@ -15,6 +15,7 @@
 #define LCD_PIN_B 11
 #define LCD_PIN_C 10
 #define SERIAL_BAUD_RATE 9600
+#define MAX_RECEIVED_BUFFER_SIZE 128
 
 LiquidCrystal595 lcd(LCD_PIN_A, LCD_PIN_B, LCD_PIN_C);
 
@@ -63,7 +64,7 @@ void writeHeartBeatToDisplay() {
 void checkIfTelegramIsAvailableToReceive() {
   if (Serial.available()) {
     byte receivedBufferIterator = 0;
-    byte receivedBuffer[128];
+    byte receivedBuffer[MAX_RECEIVED_BUFFER_SIZE];
     unsigned long startTime = millis();
     int timeoutMS = 50;
     do
@@ -78,7 +79,7 @@ void checkIfTelegramIsAvailableToReceive() {
   }
 }
 
-bool checkIfDisplayTelegram(byte inputArray[128], byte inputArrayInterator) {
+bool checkIfDisplayTelegram(byte inputArray[MAX_RECEIVED_BUFFER_SIZE], byte inputArrayInterator) {
   if (inputArray[0] == inputArrayInterator) {
     if (inputArray[1] == 1) {
       byte checkSum = 0;
