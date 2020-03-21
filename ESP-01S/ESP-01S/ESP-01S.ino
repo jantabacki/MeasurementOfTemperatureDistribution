@@ -11,8 +11,10 @@
 #define MAX_RECEIVED_BUFFER_SIZE 128
 #define HOST_ADDRESS "192.168.0.11"
 #define HOST_PORT 1989
+#define SIGNALING_LED 2
 
 TimeSynchronizer timeSynchronizer;
+Timer timer(1);
 
 byte packetBuffer[48];
 WiFiUDP udp;
@@ -25,6 +27,16 @@ void sendNTPpacket(IPAddress& address) {
   udp.beginPacket(address, 123);
   udp.write(packetBuffer, 48);
   udp.endPacket();
+}
+
+bool LEDHeartBeatValue = false;
+void writeHeartBeatToLED() {
+  if (LEDHeartBeatValue) {
+    digitalWrite(SIGNALING_LED, HIGH);
+  } else {
+    digitalWrite(SIGNALING_LED, LOW);
+  }
+  LEDHeartBeatValue = !LEDHeartBeatValue;
 }
 
 void printDataOnDisplay(String valueToDisplay) {
@@ -68,49 +80,15 @@ bool getTimeFromServer() {
   return true;
 }
 
-void setup() {
-  Serial.begin(SERIAL_BAUD_RATE);
-  const char* ssid     = WIFI_SSID;
-  const char* password = WIFI_PASSWORD;
-  WiFi.begin(ssid, password);
-  udp.begin(LOCAL_UDP_PORT);
-  int wifi_ctr = 0;
-  byte getTimeRetries = 0;
-  while (!getTimeFromServer()) {
-    String outputForDisplay = "Get Time Retry";
-    outputForDisplay += (char)0;
-    outputForDisplay += (char)0;
-    outputForDisplay += String(getTimeRetries);
-    printDataOnDisplay(outputForDisplay);
-    getTimeRetries++;
-  }
-  printDataOnDisplay("NTP Success");
-}
-
 bool checkIfTemperatureTelegram(byte inputArray[MAX_RECEIVED_BUFFER_SIZE], byte inputArrayInterator) {
   if (inputArray[0] == inputArrayInterator) {
-    if (inputArray[1] == 1) {
+    if (inputArray[1] == 2) {
       byte checkSum = 0;
       for (int i = 0; i <= inputArrayInterator - 1; i++) {
         checkSum += inputArray[i];
       }
       if (inputArray[inputArrayInterator - 1] == checkSum) {
-        byte bufferToSend[7];
-        bufferToSend[0] = 7;
-        bufferToSend[1] = 3;
-        bufferToSend[2] = inputArray[2];
-        bufferToSend[3] = inputArray[3];
-        bufferToSend[4] = inputArray[4];
-        bufferToSend[5] = inputArray[5];
-        for (int i = 0 ; i < 6; i++) {
-          bufferToSend[6] += bufferToSend[i];
-        }
-        WiFiClient client;
-        if (!client.connect(HOST_ADDRESS, HOST_PORT)) {
-          return true;
-        }
-        client.write(bufferToSend, 7);
-        return true;
+        return sendTelegramToVisualisation(inputArray);
       } else {
         return false;
       }
@@ -123,8 +101,23 @@ bool checkIfTemperatureTelegram(byte inputArray[MAX_RECEIVED_BUFFER_SIZE], byte 
   }
 }
 
-void sendTelegramToVisualisation() {
-
+bool sendTelegramToVisualisation(byte *inputArray) {
+  byte bufferToSend[7];
+  bufferToSend[0] = 7;
+  bufferToSend[1] = 3;
+  bufferToSend[2] = inputArray[2];
+  bufferToSend[3] = inputArray[3];
+  bufferToSend[4] = inputArray[4];
+  bufferToSend[5] = inputArray[5];
+  for (int i = 0 ; i < 6; i++) {
+    bufferToSend[6] += bufferToSend[i];
+  }
+  WiFiClient client;
+  if (!client.connect(HOST_ADDRESS, HOST_PORT)) {
+    return true;
+  }
+  client.write(bufferToSend, 7);
+  return true;
 }
 
 void checkIfTelegramIsAvailableToReceive() {
@@ -145,6 +138,28 @@ void checkIfTelegramIsAvailableToReceive() {
   }
 }
 
+void setup() {
+  Serial.begin(SERIAL_BAUD_RATE);
+  const char* ssid     = WIFI_SSID;
+  const char* password = WIFI_PASSWORD;
+  WiFi.begin(ssid, password);
+  udp.begin(LOCAL_UDP_PORT);
+  int wifi_ctr = 0;
+  timer.AddThread(&writeHeartBeatToLED, 1000);
+  byte getTimeRetries = 0;
+  while (!getTimeFromServer()) {
+    String outputForDisplay = "Get Time Retry";
+    outputForDisplay += (char)0;
+    outputForDisplay += (char)0;
+    outputForDisplay += String(getTimeRetries);
+    printDataOnDisplay(outputForDisplay);
+    getTimeRetries++;
+    timer.CheckThreads();
+  }
+  printDataOnDisplay("NTP Success");
+}
+
 void loop() {
   checkIfTelegramIsAvailableToReceive();
+  timer.CheckThreads();
 }

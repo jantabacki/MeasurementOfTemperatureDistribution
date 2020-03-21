@@ -1,0 +1,5 @@
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureSaver\bin\Debug\TemperatureSaver.exe.config
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureSaver\bin\Debug\TemperatureSaver.exe
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureSaver\bin\Debug\TemperatureSaver.pdb
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureSaver\obj\Debug\TemperatureSaver.exe
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureSaver\obj\Debug\TemperatureSaver.pdb

@@ -1,0 +1,4 @@
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Telegrams\bin\Debug\Telegrams.dll
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Telegrams\bin\Debug\Telegrams.pdb
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Telegrams\obj\Debug\Telegrams.dll
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Telegrams\obj\Debug\Telegrams.pdb

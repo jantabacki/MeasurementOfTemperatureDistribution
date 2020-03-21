@@ -1,0 +1,9 @@
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TelegramTester\bin\Debug\TelegramTester.exe.config
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TelegramTester\bin\Debug\TelegramTester.exe
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TelegramTester\bin\Debug\TelegramTester.pdb
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TelegramTester\bin\Debug\Logger.dll
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TelegramTester\bin\Debug\Logger.pdb
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TelegramTester\obj\Debug\TelegramTester.csprojAssemblyReference.cache
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TelegramTester\obj\Debug\TelegramTester.csproj.CopyComplete
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TelegramTester\obj\Debug\TelegramTester.exe
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TelegramTester\obj\Debug\TelegramTester.pdb

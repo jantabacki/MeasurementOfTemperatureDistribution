@@ -79,7 +79,7 @@ void checkIfTelegramIsAvailableToReceive() {
   }
 }
 
-bool checkIfDisplayTelegram(byte inputArray[MAX_RECEIVED_BUFFER_SIZE], byte inputArrayInterator) {
+bool checkIfDisplayTelegram(byte *inputArray, byte inputArrayInterator) {
   if (inputArray[0] == inputArrayInterator) {
     if (inputArray[1] == 1) {
       byte checkSum = 0;

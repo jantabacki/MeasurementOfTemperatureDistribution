@@ -1,0 +1,13 @@
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\bin\Debug\Visualisation.exe.config
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\bin\Debug\Visualisation.exe
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\bin\Debug\Visualisation.pdb
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\MainWindow.g.cs
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\App.g.cs
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\Visualisation_MarkupCompile.cache
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\Visualisation_MarkupCompile.lref
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\MainWindow.baml
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\Visualisation.g.resources
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\Visualisation.Properties.Resources.resources
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\Visualisation.csproj.GenerateResource.cache
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\Visualisation.exe
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\Visualisation.pdb
