@@ -4,11 +4,11 @@
 #include <ArduinoJson.h>
 #include <WiFiUdp.h>
 
-#define SERIAL_BAUD_RATE 9600
+#define SERIAL_BAUD_RATE 115200
 #define LOCAL_UDP_PORT 2390
 #define WIFI_SSID "Router-Cisco"
 #define WIFI_PASSWORD "RdCuXaAa"
-#define MAX_RECEIVED_BUFFER_SIZE 128
+#define MAX_RECEIVED_BUFFER_SIZE 131
 #define HOST_ADDRESS "192.168.0.11"
 #define HOST_PORT 1989
 #define SIGNALING_LED 2
@@ -36,6 +36,7 @@ void writeHeartBeatToLED() {
   } else {
     digitalWrite(SIGNALING_LED, LOW);
   }
+  printDataOnDisplay("Sending data");
   LEDHeartBeatValue = !LEDHeartBeatValue;
 }
 
@@ -47,7 +48,7 @@ void printDataOnDisplay(String valueToDisplay) {
     for (int i = 0; i < valueToDisplay.length(); i++) {
       bufferToSend[i + 2] = (byte)valueToDisplay[i];
     }
-    for (int i = 0; i < 2 + valueToDisplay.length(); i++) {
+    for (int i = 0; i < bufferToSend[0] - 1; i++) {
       bufferToSend[2 + valueToDisplay.length()] += bufferToSend[i];
     }
     Serial.write(bufferToSend, bufferToSend[0]);
@@ -80,11 +81,11 @@ bool getTimeFromServer() {
   return true;
 }
 
-bool checkIfTemperatureTelegram(byte inputArray[MAX_RECEIVED_BUFFER_SIZE], byte inputArrayInterator) {
+bool checkIfTemperatureTelegram(byte *inputArray, byte inputArrayInterator) {
   if (inputArray[0] == inputArrayInterator) {
     if (inputArray[1] == 2) {
       byte checkSum = 0;
-      for (int i = 0; i <= inputArrayInterator - 1; i++) {
+      for (int i = 0; i < inputArrayInterator - 1; i++) {
         checkSum += inputArray[i];
       }
       if (inputArray[inputArrayInterator - 1] == checkSum) {
@@ -102,59 +103,50 @@ bool checkIfTemperatureTelegram(byte inputArray[MAX_RECEIVED_BUFFER_SIZE], byte 
 }
 
 bool sendTelegramToVisualisation(byte *inputArray) {
-  byte bufferToSend[7];
-  bufferToSend[0] = 7;
-  bufferToSend[1] = 3;
-  bufferToSend[2] = inputArray[2];
-  bufferToSend[3] = inputArray[3];
-  bufferToSend[4] = inputArray[4];
-  bufferToSend[5] = inputArray[5];
-  for (int i = 0 ; i < 6; i++) {
-    bufferToSend[6] += bufferToSend[i];
-  }
+  inputArray[1] = 3;
+  inputArray[130] = inputArray[130] + 1;
   WiFiClient client;
   if (!client.connect(HOST_ADDRESS, HOST_PORT)) {
     return true;
   }
-  client.write(bufferToSend, 7);
+  client.write(inputArray, 131);
   return true;
 }
 
+byte receivedBufferIterator = 0;
+byte receivedBuffer[MAX_RECEIVED_BUFFER_SIZE];
 void checkIfTelegramIsAvailableToReceive() {
   if (Serial.available()) {
-    byte receivedBufferIterator = 0;
-    byte receivedBuffer[MAX_RECEIVED_BUFFER_SIZE];
-    unsigned long startTime = millis();
-    int timeoutMS = 50;
-    do
-    {
+    while (Serial.available()) {
       receivedBuffer[receivedBufferIterator++] = Serial.read();
-    } while (!(receivedBuffer[0] == receivedBufferIterator) && millis() - startTime < timeoutMS);
+    }
     if (checkIfTemperatureTelegram(receivedBuffer, receivedBufferIterator)) {
-      return;
+      //found matching telegram
+      receivedBufferIterator = 0;
+      //else if statement is for check for next telegram type
     } else {
-      return;
+      //no matching telegram
+    }
+    if (receivedBufferIterator == MAX_RECEIVED_BUFFER_SIZE) {
+      receivedBufferIterator = 0;
+      while (Serial.available()) {
+        Serial.read();
+      }
     }
   }
 }
 
 void setup() {
   Serial.begin(SERIAL_BAUD_RATE);
-  const char* ssid     = WIFI_SSID;
-  const char* password = WIFI_PASSWORD;
-  WiFi.begin(ssid, password);
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  pinMode(SIGNALING_LED, OUTPUT);
   udp.begin(LOCAL_UDP_PORT);
   int wifi_ctr = 0;
   timer.AddThread(&writeHeartBeatToLED, 1000);
-  byte getTimeRetries = 0;
+  printDataOnDisplay("NTP connecting");
   while (!getTimeFromServer()) {
-    String outputForDisplay = "Get Time Retry";
-    outputForDisplay += (char)0;
-    outputForDisplay += (char)0;
-    outputForDisplay += String(getTimeRetries);
-    printDataOnDisplay(outputForDisplay);
-    getTimeRetries++;
     timer.CheckThreads();
+    yield();
   }
   printDataOnDisplay("NTP Success");
 }

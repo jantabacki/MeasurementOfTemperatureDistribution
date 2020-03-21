@@ -13,6 +13,13 @@ namespace TelegramTester
         {
             try
             {
+                Logger.LoggerSettings(new List<LogType> { 
+                LogType.Error,
+                LogType.Info,
+                LogType.Success,
+                LogType.Warning
+                },"TelegramTesterLog");
+
                 Logger.Log(LogType.Info, "TelegramTester is starting...");
                 Server server = new Server();
                 server.WaitForRequest();
