@@ -1,17 +1,13 @@
 #include <ESP8266WiFi.h>
 #include <TimeSynchronizer.h>
 #include <Timer.h>
-#include <ArduinoJson.h>
 #include <WiFiUdp.h>
 #include "TelegramBuffer.h"
 
-#define SERIAL_BAUD_RATE 115200
+#define SERIAL_BAUD_RATE 9600
 #define LOCAL_UDP_PORT 2390
 #define WIFI_SSID "Router-Cisco"
 #define WIFI_PASSWORD "RdCuXaAa"
-#define MAX_RECEIVED_BUFFER_SIZE 131
-#define HOST_ADDRESS "192.168.0.11"
-#define HOST_PORT 1989
 #define SIGNALING_LED 2
 
 TimeSynchronizer timeSynchronizer;
@@ -37,26 +33,26 @@ void writeHeartBeatToLED() {
   } else {
     digitalWrite(SIGNALING_LED, LOW);
   }
-  printDataOnDisplay("Sending data");
+  //  printDataOnDisplay("Sending data");
   LEDHeartBeatValue = !LEDHeartBeatValue;
 }
 
-void printDataOnDisplay(String valueToDisplay) {
-  if (valueToDisplay.length() <= 32) {
-    byte bufferToSend[35];
-    bufferToSend[0] = 3 + valueToDisplay.length();
-    bufferToSend[1] = 1;
-    for (int i = 0; i < valueToDisplay.length(); i++) {
-      bufferToSend[i + 2] = (byte)valueToDisplay[i];
-    }
-    for (int i = 0; i < bufferToSend[0] - 1; i++) {
-      bufferToSend[2 + valueToDisplay.length()] += bufferToSend[i];
-    }
-    Serial.write(bufferToSend, bufferToSend[0]);
-  } else {
-    return;
-  }
-}
+//void printDataOnDisplay(String valueToDisplay) {
+//  if (valueToDisplay.length() <= 32) {
+//    byte bufferToSend[35];
+//    bufferToSend[0] = 3 + valueToDisplay.length();
+//    bufferToSend[1] = 1;
+//    for (int i = 0; i < valueToDisplay.length(); i++) {
+//      bufferToSend[i + 2] = (byte)valueToDisplay[i];
+//    }
+//    for (int i = 0; i < bufferToSend[0] - 1; i++) {
+//      bufferToSend[2 + valueToDisplay.length()] += bufferToSend[i];
+//    }
+//    Serial.write(bufferToSend, bufferToSend[0]);
+//  } else {
+//    return;
+//  }
+//}
 
 bool getTimeFromServer() {
   if (WiFi.status() != WL_CONNECTED) {
@@ -82,61 +78,6 @@ bool getTimeFromServer() {
   return true;
 }
 
-bool checkIfTemperatureTelegram(byte *inputArray, byte inputArrayInterator) {
-  if (inputArray[0] == inputArrayInterator) {
-    if (inputArray[1] == 2) {
-      byte checkSum = 0;
-      for (int i = 0; i < inputArrayInterator - 1; i++) {
-        checkSum += inputArray[i];
-      }
-      if (inputArray[inputArrayInterator - 1] == checkSum) {
-        return sendTelegramToVisualisation(inputArray);
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  }
-  else {
-    return false;
-  }
-}
-
-bool sendTelegramToVisualisation(byte *inputArray) {
-  inputArray[1] = 3;
-  inputArray[130] = inputArray[130] + 1;
-  WiFiClient client;
-  if (!client.connect(HOST_ADDRESS, HOST_PORT)) {
-    return true;
-  }
-  client.write(inputArray, 131);
-  return true;
-}
-
-byte receivedBufferIterator = 0;
-byte receivedBuffer[MAX_RECEIVED_BUFFER_SIZE];
-void checkIfTelegramIsAvailableToReceive() {
-  if (Serial.available()) {
-    while (Serial.available()) {
-      receivedBuffer[receivedBufferIterator++] = Serial.read();
-    }
-    if (checkIfTemperatureTelegram(receivedBuffer, receivedBufferIterator)) {
-      //found matching telegram
-      receivedBufferIterator = 0;
-      //else if statement is for check for next telegram type
-    } else {
-      //no matching telegram
-    }
-    if (receivedBufferIterator == MAX_RECEIVED_BUFFER_SIZE) {
-      receivedBufferIterator = 0;
-      while (Serial.available()) {
-        Serial.read();
-      }
-    }
-  }
-}
-
 void setup() {
   Serial.begin(SERIAL_BAUD_RATE);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -144,16 +85,16 @@ void setup() {
   udp.begin(LOCAL_UDP_PORT);
   int wifi_ctr = 0;
   timer.AddThread(&writeHeartBeatToLED, 1000);
-  printDataOnDisplay("NTP connecting");
+  //  printDataOnDisplay("NTP connecting");
   while (!getTimeFromServer()) {
     timer.CheckThreads();
     yield();
   }
-  printDataOnDisplay("NTP Success");
+  //  printDataOnDisplay("NTP Success");
 }
 
 void loop() {
-  while(Serial.available()) {
+  while (Serial.available()) {
     TelegramBuffer::AddByteToBuffer(Serial.read());
   }
   TelegramBuffer::CheckIfBufferContainsTelegram(7);

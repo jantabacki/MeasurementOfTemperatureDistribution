@@ -1,5 +1,8 @@
 #include "TelegramBuffer.h"
 
+int TelegramBuffer::bufferIterator = 0;
+byte TelegramBuffer::buffer[BUFFER_SIZE];
+
 void TelegramBuffer::AddByteToBuffer(byte newByte)
 {
   if (bufferIterator < BUFFER_SIZE)
