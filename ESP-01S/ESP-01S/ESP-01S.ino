@@ -3,6 +3,7 @@
 #include <Timer.h>
 #include <ArduinoJson.h>
 #include <WiFiUdp.h>
+#include "TelegramBuffer.h"
 
 #define SERIAL_BAUD_RATE 115200
 #define LOCAL_UDP_PORT 2390
@@ -152,6 +153,9 @@ void setup() {
 }
 
 void loop() {
-  checkIfTelegramIsAvailableToReceive();
+  while(Serial.available()) {
+    TelegramBuffer::AddByteToBuffer(Serial.read());
+  }
+  TelegramBuffer::CheckIfBufferContainsTelegram(7);
   timer.CheckThreads();
 }
