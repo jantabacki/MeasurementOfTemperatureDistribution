@@ -97,6 +97,6 @@ void loop() {
   while (Serial.available()) {
     TelegramBuffer::AddByteToBuffer(Serial.read());
   }
-  TelegramBuffer::CheckIfBufferContainsTelegram(7);
+  TelegramBuffer::CheckIfBufferContainsTelegram(18);
   timer.CheckThreads();
 }

@@ -109,30 +109,25 @@ void writeHeartBeatToDisplay() {
 //}
 
 int termistorMatrixIteratorX = 0;
-int termistorMatrixIteratorY = 0;
 void sendDataFromTermistorMatrix() {
-  byte bufferToSend[7];
-  bufferToSend[0] = 7;
+  byte bufferToSend[18];
+  bufferToSend[0] = 18;
   bufferToSend[1] = 1;
-  int bufferToSendIterator = 2;
-  int measuredValue = getValueFromTermistor(termistorMatrixIteratorX, termistorMatrixIteratorY);
-  bufferToSend[bufferToSendIterator++] = highByte(measuredValue);
-  bufferToSend[bufferToSendIterator++] = lowByte(measuredValue);
+  bufferToSend[2] = termistorMatrixIteratorX;
+  int bufferToSendIterator = 3;
+  for (int i = 0; i <= 7; i++) {
+    int measuredValue = getValueFromTermistor(termistorMatrixIteratorX, i);
+    bufferToSend[bufferToSendIterator++] = highByte(measuredValue);
+    bufferToSend[bufferToSendIterator++] = lowByte(measuredValue);
+  }
   byte checkSum = 0;
-  for (int i = 0; i < 6; i++) {
+  for (int i = 0; i < 17; i++) {
     checkSum += bufferToSend[i];
   }
-  bufferToSend[6] = checkSum;
-  Serial.write(bufferToSend, 7);
+  bufferToSend[17] = checkSum;
+  Serial.write(bufferToSend, 18);
   termistorMatrixIteratorX++;
-  if (termistorMatrixIteratorX >= 8) {
-    termistorMatrixIteratorY++;
-    termistorMatrixIteratorX = 0;
-  }
-  if (termistorMatrixIteratorY >= 8) {
-    termistorMatrixIteratorY = 0;
-    termistorMatrixIteratorX = 0;
-  }
+  termistorMatrixIteratorX = termistorMatrixIteratorX % 8;
 }
 
 void setup() {
@@ -158,7 +153,7 @@ void setup() {
   Timer::EnableThread(&writeHeartBeatToLED);
   Timer::AddThread(&writeHeartBeatToDisplay, 1000);
   Timer::EnableThread(&writeHeartBeatToDisplay);
-  Timer::AddThread(&sendDataFromTermistorMatrix, 100);
+  Timer::AddThread(&sendDataFromTermistorMatrix, 125);
   Timer::EnableThread(&sendDataFromTermistorMatrix);
 }
 
