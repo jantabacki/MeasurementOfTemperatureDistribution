@@ -14,7 +14,7 @@
 #define LCD_PIN_A 12
 #define LCD_PIN_B 11
 #define LCD_PIN_C 10
-#define SERIAL_BAUD_RATE 9600
+#define SERIAL_BAUD_RATE 115200
 #define MAX_RECEIVED_BUFFER_SIZE 256
 
 LiquidCrystal595 lcd(LCD_PIN_A, LCD_PIN_B, LCD_PIN_C);
