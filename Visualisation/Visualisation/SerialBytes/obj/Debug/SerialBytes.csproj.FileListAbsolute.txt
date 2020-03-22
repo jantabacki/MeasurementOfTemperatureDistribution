@@ -1,6 +1,5 @@
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\SerialBytes\bin\Debug\SerialBytes.exe.config
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\SerialBytes\bin\Debug\SerialBytes.exe
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\SerialBytes\bin\Debug\SerialBytes.pdb
-C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\SerialBytes\obj\Debug\SerialBytes.csprojAssemblyReference.cache
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\SerialBytes\obj\Debug\SerialBytes.exe
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\SerialBytes\obj\Debug\SerialBytes.pdb

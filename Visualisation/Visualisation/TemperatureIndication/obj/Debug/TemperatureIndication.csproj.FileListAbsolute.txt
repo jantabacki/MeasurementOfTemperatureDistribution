@@ -1,0 +1,4 @@
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureIndication\bin\Debug\TemperatureIndication.dll
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureIndication\bin\Debug\TemperatureIndication.pdb
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureIndication\obj\Debug\TemperatureIndication.dll
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureIndication\obj\Debug\TemperatureIndication.pdb

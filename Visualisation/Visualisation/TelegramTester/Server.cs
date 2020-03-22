@@ -12,11 +12,6 @@ namespace TelegramTester
     {
         TcpListener server = null;
 
-        public Server(/*Configuration config*/)
-        {
-            //this.config = config;
-        }
-
         public void WaitForRequest()
         {
             try

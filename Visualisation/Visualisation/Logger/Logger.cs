@@ -9,6 +9,7 @@ namespace LoggerLib
 {
     public static class Logger
     {
+        private static object loggerPadlock = new object();
         private static string loggerFileName = string.Empty;
         private static List<LogType> logLevel = null;
 
@@ -31,48 +32,51 @@ namespace LoggerLib
 
         public static void Log(LogType logType, string content)
         {
-            string output = string.Empty;
-
-            switch (logType)
+            lock (loggerPadlock)
             {
-                case LogType.Info:
-                    if (logLevel.Contains(LogType.Info))
-                    {
-                        Console.ForegroundColor = ConsoleColor.White;
-                        output = DateTime.Now + " [INFO] " + content;
-                    }
-                    break;
-                case LogType.Success:
-                    if (logLevel.Contains(LogType.Success))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        output = DateTime.Now + " [SUCCESS] " + content;
-                    }
-                    break;
-                case LogType.Warning:
-                    if (logLevel.Contains(LogType.Warning))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        output = DateTime.Now + " [WARNING] " + content;
-                    }
-                    break;
-                case LogType.Error:
-                    if (logLevel.Contains(LogType.Error))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        output = DateTime.Now + " [ERROR] " + content;
-                    }
-                    break;
-                default:
-                    break;
-            }
+                string output = string.Empty;
 
-            if (output != string.Empty)
-            {
-                Console.WriteLine(output);
-                using (StreamWriter sw = File.AppendText(loggerFileName))
+                switch (logType)
                 {
-                    sw.WriteLine(output);
+                    case LogType.Info:
+                        if (logLevel.Contains(LogType.Info))
+                        {
+                            Console.ForegroundColor = ConsoleColor.White;
+                            output = DateTime.Now + " [INFO] " + content;
+                        }
+                        break;
+                    case LogType.Success:
+                        if (logLevel.Contains(LogType.Success))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            output = DateTime.Now + " [SUCCESS] " + content;
+                        }
+                        break;
+                    case LogType.Warning:
+                        if (logLevel.Contains(LogType.Warning))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            output = DateTime.Now + " [WARNING] " + content;
+                        }
+                        break;
+                    case LogType.Error:
+                        if (logLevel.Contains(LogType.Error))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            output = DateTime.Now + " [ERROR] " + content;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                if (output != string.Empty)
+                {
+                    Console.WriteLine(output);
+                    using (StreamWriter sw = File.AppendText(loggerFileName))
+                    {
+                        sw.WriteLine(output);
+                    }
                 }
             }
         }

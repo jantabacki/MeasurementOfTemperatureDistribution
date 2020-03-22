@@ -11,3 +11,9 @@ C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\V
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\Visualisation.csproj.GenerateResource.cache
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\Visualisation.exe
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\Visualisation.pdb
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\Visualisation.csprojAssemblyReference.cache
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\bin\Debug\Logger.dll
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\bin\Debug\TemperatureIndication.dll
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\bin\Debug\Logger.pdb
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\bin\Debug\TemperatureIndication.pdb
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\Visualisation.csproj.CopyComplete

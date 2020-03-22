@@ -1,6 +1,0 @@
-C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperaturePlayback\bin\Debug\TemperaturePlayback.exe.config
-C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperaturePlayback\bin\Debug\TemperaturePlayback.exe
-C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperaturePlayback\bin\Debug\TemperaturePlayback.pdb
-C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperaturePlayback\obj\Debug\TemperaturePlayback.csprojAssemblyReference.cache
-C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperaturePlayback\obj\Debug\TemperaturePlayback.exe
-C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperaturePlayback\obj\Debug\TemperaturePlayback.pdb
