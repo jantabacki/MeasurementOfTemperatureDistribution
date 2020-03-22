@@ -13,8 +13,8 @@ namespace SerialBytes
         {
             List<byte> byteList = new List<byte>();
             SerialPort serialPort = new SerialPort();
-            serialPort.BaudRate = 112500;
-            serialPort.PortName = "COM12";
+            serialPort.BaudRate = 9600;
+            serialPort.PortName = "COM5";
             string input = string.Empty;
             Console.WriteLine("send or listen");
             input = Console.ReadLine();

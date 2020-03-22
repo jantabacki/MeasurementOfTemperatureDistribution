@@ -48,14 +48,13 @@ void TelegramBuffer::CheckIfBufferContainsTelegram(byte telegramSize)
             }
             TelegramAnalyzer::AnalyzeTelegram(telegramBody, MAX_TELEGRAM_BODY_SIZE);
           }
-          for (int j = 0; j < bufferIterator - endPositionOfTelegram; j++)
+          int copyIterator = 0;
+          for (int j = endPositionOfTelegram + 1; j < bufferIterator; j++)
           {
-            for (int k = endPositionOfTelegram + 1; k < bufferIterator; k++)
-            {
-              buffer[j] = buffer[k];
-            }
+            buffer[copyIterator++] = buffer[j];
           }
           bufferIterator -= endPositionOfTelegram + 1;
+          break;
         }
       }
     }

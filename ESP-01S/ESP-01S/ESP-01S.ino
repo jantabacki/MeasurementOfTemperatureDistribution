@@ -1,8 +1,8 @@
 #include <ESP8266WiFi.h>
-#include <TimeSynchronizer.h>
 #include <Timer.h>
 #include <WiFiUdp.h>
 #include "TelegramBuffer.h"
+#include "InternalTime.h"
 
 #define SERIAL_BAUD_RATE 9600
 #define LOCAL_UDP_PORT 2390
@@ -10,7 +10,6 @@
 #define WIFI_PASSWORD "RdCuXaAa"
 #define SIGNALING_LED 2
 
-TimeSynchronizer timeSynchronizer;
 Timer timer(2);
 
 byte packetBuffer[48];
@@ -83,7 +82,7 @@ bool getTimeFromServer() {
   unsigned long highWord = word(packetBuffer[40], packetBuffer[41]);
   unsigned long lowWord = word(packetBuffer[42], packetBuffer[43]);
   unsigned long secsSince1900 = highWord << 16 | lowWord;
-  timeSynchronizer.ExternalSynchronization(0, 0, secsSince1900);
+  InternalTime::ExternalSynchronization(0, 0, secsSince1900);
   return true;
 }
 
@@ -105,6 +104,6 @@ void loop() {
   while (Serial.available()) {
     TelegramBuffer::AddByteToBuffer(Serial.read());
   }
-  TelegramBuffer::CheckIfBufferContainsTelegram(18);
+  TelegramBuffer::CheckIfBufferContainsTelegram(20);
   timer.CheckThreads();
 }

@@ -2,7 +2,7 @@
 #define TelegramBuffer_h
 
 #define BUFFER_SIZE 1024
-#define MAX_TELEGRAM_BODY_SIZE 16
+#define MAX_TELEGRAM_BODY_SIZE 18
 
 #include <Arduino.h>
 #include "TelegramAnalyzer.h"

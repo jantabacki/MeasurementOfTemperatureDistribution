@@ -37,26 +37,31 @@ void writeHeartBeatToLED() {
   LEDHeartBeatValue = !LEDHeartBeatValue;
 }
 
-int termistorMatrixIteratorX = 0;
+byte termistorMatrixIteratorX = 0;
 void sendDataFromTermistorMatrix() {
-  byte bufferToSend[18];
-  bufferToSend[0] = 18;
+  byte bufferToSend[20];
+  bufferToSend[0] = 20;
   bufferToSend[1] = 1;
   bufferToSend[2] = termistorMatrixIteratorX;
   int bufferToSendIterator = 3;
-  for (int i = 0; i <= 7; i++) {
+  for (int i = 0; i <= 7; i++)
+  {
     int measuredValue = getValueFromTermistor(termistorMatrixIteratorX, i);
     bufferToSend[bufferToSendIterator++] = highByte(measuredValue);
     bufferToSend[bufferToSendIterator++] = lowByte(measuredValue);
   }
   byte checkSum = 0;
-  for (int i = 0; i < 17; i++) {
+  for (int i = 0; i < 19; i++)
+  {
     checkSum += bufferToSend[i];
   }
-  bufferToSend[17] = checkSum;
-  Serial.write(bufferToSend, 18);
+  bufferToSend[19] = checkSum;
   termistorMatrixIteratorX++;
-  termistorMatrixIteratorX = termistorMatrixIteratorX % 8;
+  if (termistorMatrixIteratorX >= 8)
+  {
+    termistorMatrixIteratorX = 0;
+  }
+  Serial.write(bufferToSend, 20);
 }
 
 void setup() {
@@ -79,7 +84,7 @@ void setup() {
 
   Timer::AddThread(&writeHeartBeatToLED, 1000);
   Timer::EnableThread(&writeHeartBeatToLED);
-  Timer::AddThread(&sendDataFromTermistorMatrix, 30);
+  Timer::AddThread(&sendDataFromTermistorMatrix, 125);
   Timer::EnableThread(&sendDataFromTermistorMatrix);
 }
 
