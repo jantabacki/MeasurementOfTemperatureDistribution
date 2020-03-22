@@ -11,7 +11,7 @@
 #define SIGNALING_LED 2
 
 TimeSynchronizer timeSynchronizer;
-Timer timer(1);
+Timer timer(2);
 
 byte packetBuffer[48];
 WiFiUDP udp;
@@ -33,26 +33,35 @@ void writeHeartBeatToLED() {
   } else {
     digitalWrite(SIGNALING_LED, LOW);
   }
-  //  printDataOnDisplay("Sending data");
   LEDHeartBeatValue = !LEDHeartBeatValue;
 }
 
-//void printDataOnDisplay(String valueToDisplay) {
-//  if (valueToDisplay.length() <= 32) {
-//    byte bufferToSend[35];
-//    bufferToSend[0] = 3 + valueToDisplay.length();
-//    bufferToSend[1] = 1;
-//    for (int i = 0; i < valueToDisplay.length(); i++) {
-//      bufferToSend[i + 2] = (byte)valueToDisplay[i];
-//    }
-//    for (int i = 0; i < bufferToSend[0] - 1; i++) {
-//      bufferToSend[2 + valueToDisplay.length()] += bufferToSend[i];
-//    }
-//    Serial.write(bufferToSend, bufferToSend[0]);
-//  } else {
-//    return;
-//  }
-//}
+bool LCDHeartBeatValue = false;
+void writeHeartBeatToLCD() {
+  LCDHeartBeatValue = !LCDHeartBeatValue;
+  byte displayTelegramToSend[35];
+  displayTelegramToSend[0] = 35;
+  displayTelegramToSend[1] = 1;
+  displayTelegramToSend[2] = (byte)'E';
+  displayTelegramToSend[3] = (byte)'S';
+  displayTelegramToSend[4] = (byte)'P';
+  displayTelegramToSend[5] = (byte)' ';
+  if (LCDHeartBeatValue) {
+    displayTelegramToSend[6] = (byte)'X';
+  } else {
+    displayTelegramToSend[6] = (byte)'+';
+  }
+  for (int i = 7; i < 35; i++) {
+    displayTelegramToSend[i] = 0;
+  }
+  byte checkSum = 0;
+  for (int j = 0; j < 34; j++)
+  {
+    checkSum += displayTelegramToSend[j];
+  }
+  displayTelegramToSend[34] = checkSum;
+  Serial.write(displayTelegramToSend, 35);
+}
 
 bool getTimeFromServer() {
   if (WiFi.status() != WL_CONNECTED) {
@@ -85,12 +94,11 @@ void setup() {
   udp.begin(LOCAL_UDP_PORT);
   int wifi_ctr = 0;
   timer.AddThread(&writeHeartBeatToLED, 1000);
-  //  printDataOnDisplay("NTP connecting");
+  timer.AddThread(&writeHeartBeatToLCD, 1000);
   while (!getTimeFromServer()) {
     timer.CheckThreads();
     yield();
   }
-  //  printDataOnDisplay("NTP Success");
 }
 
 void loop() {

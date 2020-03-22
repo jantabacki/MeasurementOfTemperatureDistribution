@@ -1,5 +1,5 @@
-#include <LiquidCrystal595.h>
 #include <InterruptTimer.h>
+#include "TelegramBuffer.h"
 
 #define SHIFT_REGISTER_ENABLE_PIN 9
 #define MULTIPLEXER_ENABLE_PIN 5
@@ -11,19 +11,7 @@
 #define SHIFT_REGISTER_PIN_B 7
 #define SHIFT_REGISTER_PIN_C 8
 #define SIGNALING_LED 13
-#define LCD_PIN_A 12
-#define LCD_PIN_B 11
-#define LCD_PIN_C 10
 #define SERIAL_BAUD_RATE 9600
-#define MAX_RECEIVED_BUFFER_SIZE 256
-
-LiquidCrystal595 lcd(LCD_PIN_A, LCD_PIN_B, LCD_PIN_C);
-
-void writeToDisplay(int posX, int posY, char character) {
-  lcd.setCursor(posX, posY);
-  lcd.print(character);
-  delay(1);
-}
 
 int getValueFromTermistor(byte posX, byte posY) {
   digitalWrite(SHIFT_REGISTER_PIN_C, LOW);
@@ -49,65 +37,6 @@ void writeHeartBeatToLED() {
   LEDHeartBeatValue = !LEDHeartBeatValue;
 }
 
-bool displayHreartBeatValue = false;
-void writeHeartBeatToDisplay() {
-  if (displayHreartBeatValue) {
-    writeToDisplay(15, 0, '+');
-  } else {
-    writeToDisplay(15, 0, 'X');
-  }
-  displayHreartBeatValue = !displayHreartBeatValue;
-}
-
-//byte receivedBufferIterator = 0;
-//byte receivedBuffer[MAX_RECEIVED_BUFFER_SIZE];
-//void checkIfTelegramIsAvailableToReceive() {
-//  if (Serial.available()) {
-//    receivedBuffer[receivedBufferIterator++] = Serial.read();
-//    if (checkIfDisplayTelegram(receivedBuffer, receivedBufferIterator)) {
-//      receivedBufferIterator = 0;
-//    } else {
-//      writeToDisplay(0, 0, 'E');
-//    }
-//    if (receivedBufferIterator == MAX_RECEIVED_BUFFER_SIZE) {
-//      receivedBufferIterator = 0;
-//    }
-//  }
-//}
-
-//bool checkIfDisplayTelegram(byte *inputArray, byte inputArrayInterator) {
-//  if (inputArray[0] == inputArrayInterator) {
-//    if (inputArray[1] == 1) {
-//      byte checkSum = 0;
-//      for (int i = 0; i < inputArrayInterator - 1; i++) {
-//        checkSum += inputArray[i];
-//      }
-//      if (inputArray[inputArrayInterator - 1] == checkSum) {
-//        int displayIteratorX = 0;
-//        int displayIteratorY = 0;
-//        for (int i = 2; i <= inputArrayInterator - 2; i++) {
-//          if (inputArray[i] != 0) {
-//            writeToDisplay(displayIteratorX, displayIteratorY, (char)inputArray[i]);
-//          }
-//          displayIteratorX++;
-//          if (displayIteratorX >= 16) {
-//            displayIteratorX = 0;
-//            displayIteratorY++;
-//          }
-//        }
-//        return true;
-//      } else {
-//        return false;
-//      }
-//    } else {
-//      return false;
-//    }
-//  }
-//  else {
-//    return false;
-//  }
-//}
-
 int termistorMatrixIteratorX = 0;
 void sendDataFromTermistorMatrix() {
   byte bufferToSend[18];
@@ -132,7 +61,6 @@ void sendDataFromTermistorMatrix() {
 
 void setup() {
   Serial.begin(SERIAL_BAUD_RATE);
-  lcd.begin(16, 2);
   pinMode(SHIFT_REGISTER_ENABLE_PIN, OUTPUT);
   pinMode(MULTIPLEXER_ENABLE_PIN, OUTPUT);
   pinMode(TERMISTOR_MATRIX_OUTPUT_ANALOG_PIN, INPUT);
@@ -147,14 +75,17 @@ void setup() {
   digitalWrite(MULTIPLEXER_ENABLE_PIN, LOW);
   digitalWrite(SHIFT_REGISTER_ENABLE_PIN, LOW);
 
-  Timer::CreateSpace(3);
+  Timer::CreateSpace(2);
 
   Timer::AddThread(&writeHeartBeatToLED, 1000);
   Timer::EnableThread(&writeHeartBeatToLED);
-  Timer::AddThread(&writeHeartBeatToDisplay, 1000);
-  Timer::EnableThread(&writeHeartBeatToDisplay);
-  Timer::AddThread(&sendDataFromTermistorMatrix, 125);
+  Timer::AddThread(&sendDataFromTermistorMatrix, 30);
   Timer::EnableThread(&sendDataFromTermistorMatrix);
 }
 
-void loop() {}
+void loop() {
+  while (Serial.available()) {
+    TelegramBuffer::AddByteToBuffer(Serial.read());
+  }
+  TelegramBuffer::CheckIfBufferContainsTelegram(35);
+}

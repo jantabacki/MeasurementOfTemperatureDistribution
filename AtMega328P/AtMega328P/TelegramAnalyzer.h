@@ -1,19 +1,21 @@
 #ifndef TelegramAnalyzer_h
 #define TelegramAnalyzer_h
 
-#define HOST_ADDRESS "192.168.0.11"
-#define HOST_PORT 1989
+#define LCD_PIN_A 12
+#define LCD_PIN_B 11
+#define LCD_PIN_C 10
 
 #include <Arduino.h>
-#include <ESP8266WiFi.h>
+#include <LiquidCrystal595.h>
 
 class TelegramAnalyzer {
   private:
-    static int visualisationDataPacketIterator;
-    static byte visualisationDataPacket[1024];
     static void telegramTypeA(byte[], int);
     static void telegramTypeB(byte[], int);
+    static bool wasDisplayInitialized;
+    static void initDisplay(int, int);
   public:
+    static LiquidCrystal595 lcd;
     static void AnalyzeTelegram(byte[], int);
 };
 
