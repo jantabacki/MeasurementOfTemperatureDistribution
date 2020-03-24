@@ -37,8 +37,6 @@ namespace TemperatureServer
                 logString += $"{singleByte} ";
             }
             Logger.Log(LogType.Info, logString);
-            //Parse telegram here
-            //[1] [245 21 34 226] [1] [6] [0 231] [0 234] [0 236] [0 239] [0 241] [0 244] [0 245] [0 247]
             byte[] byteTimeStamp = new byte[] { telegramBody[1], telegramBody[2], telegramBody[3], telegramBody[4] };
             uint NTPtimeStamp = BitConverter.ToUInt32(byteTimeStamp, 0);
             DateTime timeStamp = new DateTime(1900, 1, 1, 0, 0, 0).AddSeconds(NTPtimeStamp);

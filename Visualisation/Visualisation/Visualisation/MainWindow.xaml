@@ -5,13 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Visualisation"
         mc:Ignorable="d"
-        Title="MainWindow" Height="436" Width="619.737">
+        Title="Visualisation" Height="453" Width="366.737">
     <Grid>
         <Button x:Name="btnLoadFile" Content="Load File" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="btnLoadFile_Click"/>
-        <Canvas x:Name="mainCanvas" HorizontalAlignment="Left" Height="320" Margin="10,35,0,0" VerticalAlignment="Top" Width="320"/>
-        <Slider x:Name="mainSlider" HorizontalAlignment="Left" Margin="10,360,0,0" VerticalAlignment="Top" Width="320" SmallChange="1" ValueChanged="mainSlider_ValueChanged"/>
+        <Canvas x:Name="mainCanvas" HorizontalAlignment="Left" Height="328" Margin="10,35,0,0" VerticalAlignment="Top" Width="328"/>
+        <Slider x:Name="mainSlider" HorizontalAlignment="Left" Margin="10,384,0,0" VerticalAlignment="Top" Width="336" SmallChange="1" ValueChanged="mainSlider_ValueChanged"/>
         <Label x:Name="lbl" Content="Time" HorizontalAlignment="Left" Margin="90,7,0,0" VerticalAlignment="Top"/>
-        <Slider x:Name="minAnalogVal" HorizontalAlignment="Left" Margin="335,35,0,0" VerticalAlignment="Top" Width="267" Maximum="1023"/>
-        <Slider x:Name="maxAnalogVal" HorizontalAlignment="Left" Margin="335,58,0,0" VerticalAlignment="Top" Width="267" Maximum="1023" Minimum="1"/>
     </Grid>
 </Window>

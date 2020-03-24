@@ -58,8 +58,8 @@ namespace Visualisation
         Rectangle drawRectangle(int posX, int posY)
         {
             Rectangle rectangle = new Rectangle();
-            Canvas.SetTop(rectangle, posX * 40);
-            Canvas.SetLeft(rectangle, posY * 40);
+            Canvas.SetTop(rectangle, posX * 41);
+            Canvas.SetLeft(rectangle, posY * 41);
             rectangle.Width = 40;
             rectangle.Height = 40;
             SolidColorBrush solidColorBrush = new SolidColorBrush();
@@ -86,36 +86,32 @@ namespace Visualisation
                 mainSlider.Maximum = temperatureIndications.Count - 1;
             }
         }
-
+        int previousSliderPosition = 0;
         private void mainSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            TemperatureIndication selectedIndication = temperatureIndications[(int)mainSlider.Value];
-            lbl.Content = selectedIndication.DateTime.ToString();
-            SolidColorBrush solidColorBrush = new SolidColorBrush();
-            var appConfig = ConfigurationManager.AppSettings;
-            
-            //do dodania pełny zakres temperatur od minimalnej do maksymalnej
-            //więcej informacji powinno być transmitowane do wizualizacji 
-            if (selectedIndication.Value <= (int)maxAnalogVal.Value)
+            if (previousSliderPosition < (int)mainSlider.Value)
             {
-                solidColorBrush.Color =
-                    colors[
-                        ConvertFromAnalogToRGBValue(
-                            ConvertFromAnalogToRGBValue(
-                                selectedIndication.Value,
-                                (int)minAnalogVal.Value,
-                                (int)maxAnalogVal.Value,
-                                0,
-                                1023),
-                            0,
-                            1023,
-                            0,
-                            764)];
+                for (int i = previousSliderPosition; i <= (int)mainSlider.Value; i++)
+                {
+                    displayIndication(i);
+                }
             }
             else
             {
-                solidColorBrush.Color = colors[764];
+                for (int i = previousSliderPosition; i >= (int)mainSlider.Value; i--)
+                {
+                    displayIndication(i);
+                }
             }
+            previousSliderPosition = (int)mainSlider.Value;
+        }
+
+        private void displayIndication(int indicationPosition)
+        {
+            TemperatureIndication selectedIndication = temperatureIndications[indicationPosition];
+            lbl.Content = selectedIndication.DateTime.ToString();
+            SolidColorBrush solidColorBrush = new SolidColorBrush();
+            solidColorBrush.Color = colors[ConvertFromAnalogToRGBValue(selectedIndication.Value, 0, 1023, 0, 764)];
             rectangles[selectedIndication.PosX, selectedIndication.PosY].Fill = solidColorBrush;
         }
 
