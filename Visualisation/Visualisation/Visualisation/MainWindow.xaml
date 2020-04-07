@@ -5,11 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Visualisation"
         mc:Ignorable="d"
-        Title="Visualisation" Height="453" Width="366.737">
+        Title="Visualisation" Height="456" Width="364.737" ResizeMode="NoResize">
     <Grid>
-        <Button x:Name="btnLoadFile" Content="Load File" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="btnLoadFile_Click"/>
-        <Canvas x:Name="mainCanvas" HorizontalAlignment="Left" Height="328" Margin="10,35,0,0" VerticalAlignment="Top" Width="328"/>
-        <Slider x:Name="mainSlider" HorizontalAlignment="Left" Margin="10,384,0,0" VerticalAlignment="Top" Width="336" SmallChange="1" ValueChanged="mainSlider_ValueChanged"/>
-        <Label x:Name="lbl" Content="Time" HorizontalAlignment="Left" Margin="90,7,0,0" VerticalAlignment="Top"/>
+        <Canvas x:Name="mainCanvas" HorizontalAlignment="Left" Height="328" Margin="10,25,0,0" VerticalAlignment="Top" Width="328"/>
+        <Slider x:Name="mainSlider" HorizontalAlignment="Left" Margin="10,358,0,0" VerticalAlignment="Top" Width="328" SmallChange="1" ValueChanged="mainSlider_ValueChanged" Maximum="0"/>
+        <Label x:Name="lblTimestamp" Content="Time stamp" HorizontalAlignment="Left" Margin="10,381,0,0" VerticalAlignment="Top" Width="328"/>
+        <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="364">
+            <MenuItem Header="File">
+                <MenuItem x:Name="menuItemLoad" Header="Load file" Click="menuItemLoad_Click">
+
+                </MenuItem>
+                <Separator></Separator>
+                <MenuItem x:Name="menuItemExit" Header="Exit" Click="menuItemExit_Click">
+
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem Header="Values">
+                    <MenuItem x:Name="menuItemShowValues" Header="Show values" Click="menuItemShowValues_Click">
+
+                    </MenuItem>
+                    <MenuItem x:Name="menuItemHideValues" Header="Hide values" Click="menuItemHideValues_Click">
+
+                    </MenuItem>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Player">
+                <MenuItem x:Name="menuItemPlay" Header="Play" Click="menuItemPlay_Click">
+
+                </MenuItem>
+                <MenuItem x:Name="menuItemReset" Header="Reset" Click="menuItemReset_Click">
+
+                </MenuItem>
+                <MenuItem x:Name="menuItemStop" Header="Stop" Click="menuItemStop_Click">
+
+                </MenuItem>
+            </MenuItem>
+        </Menu>
     </Grid>
 </Window>

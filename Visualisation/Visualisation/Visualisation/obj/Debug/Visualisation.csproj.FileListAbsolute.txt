@@ -17,3 +17,4 @@ C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\V
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\bin\Debug\Logger.pdb
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\bin\Debug\TemperatureIndication.pdb
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\Visualisation.csproj.CopyComplete
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Debug\Visualisation.csproj.CoreCompileInputs.cache
