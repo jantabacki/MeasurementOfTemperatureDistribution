@@ -19,6 +19,7 @@ void TelegramAnalyzer::AnalyzeTelegram(byte inputArray[], int inputArraySize)
 //Temperature telegram received
 int TelegramAnalyzer::visualisationDataPacketIterator = 0;
 byte TelegramAnalyzer::visualisationDataPacket[VISUALISATION_DATA_SIZE];
+WiFiClient TelegramAnalyzer::client;
 void TelegramAnalyzer::telegramTypeA(byte telegramBody[], int inputArraySize)
 {
   int startVisualisationDataPacketIterator = visualisationDataPacketIterator;
@@ -43,10 +44,13 @@ void TelegramAnalyzer::telegramTypeA(byte telegramBody[], int inputArraySize)
   visualisationDataPacket[visualisationDataPacketIterator++] = checkSum;
   if (visualisationDataPacketIterator >= VISUALISATION_DATA_SIZE)
   {
-    WiFiClient client;
-    if (!client.connect(HOST_ADDRESS, HOST_PORT)) {
+    if (!client.connected()) {
+      if (client.connect(HOST_ADDRESS, HOST_PORT)) {
+        client.write(visualisationDataPacket, VISUALISATION_DATA_SIZE);
+      }
+    } else {
+      client.write(visualisationDataPacket, VISUALISATION_DATA_SIZE);
     }
-    client.write(visualisationDataPacket, VISUALISATION_DATA_SIZE);
     visualisationDataPacketIterator = 0;
   }
 }

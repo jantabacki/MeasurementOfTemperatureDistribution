@@ -1,0 +1,15 @@
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\bin\Debug\AtMega328P_Sim.exe.config
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\bin\Debug\AtMega328P_Sim.exe
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\bin\Debug\AtMega328P_Sim.pdb
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\obj\Debug\AtMega328P_Sim.csprojAssemblyReference.cache
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\obj\Debug\MainWindow.g.cs
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\obj\Debug\App.g.cs
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\obj\Debug\AtMega328P_Sim_MarkupCompile.cache
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\obj\Debug\AtMega328P_Sim_MarkupCompile.lref
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\obj\Debug\MainWindow.baml
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\obj\Debug\AtMega328P_Sim.g.resources
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\obj\Debug\AtMega328P_Sim.Properties.Resources.resources
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\obj\Debug\AtMega328P_Sim.csproj.GenerateResource.cache
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\obj\Debug\AtMega328P_Sim.csproj.CoreCompileInputs.cache
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\obj\Debug\AtMega328P_Sim.exe
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\AtMega328P_Sim\AtMega328P_Sim\obj\Debug\AtMega328P_Sim.pdb

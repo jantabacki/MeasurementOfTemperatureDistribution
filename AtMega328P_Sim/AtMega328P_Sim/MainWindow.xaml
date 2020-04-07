@@ -1,0 +1,23 @@
+﻿<Window x:Class="AtMega328P_Sim.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AtMega328P_Sim"
+        mc:Ignorable="d"
+        Title="AtMega328P-Sim" Height="296.407" Width="693.562" ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Port COM name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtBoxPortName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="COM1" VerticalAlignment="Top" Width="120" Margin="10,41,0,0"/>
+        <Label Content="Baud rate" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtBoxBaudRate" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="9600" VerticalAlignment="Top" Width="120" Margin="10,100,0,0"/>
+        <Button x:Name="btnConnect" Content="Connect" HorizontalAlignment="Left" Margin="10,128,0,0" VerticalAlignment="Top" Width="75" Click="btnConnect_Click"/>
+        <Label Content="Telegrams per second" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtBoxTelegramsPerSecond" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="8" VerticalAlignment="Top" Width="120" Margin="10,184,0,0"/>
+        <Button x:Name="btnApply" Content="Apply" HorizontalAlignment="Left" Margin="10,212,0,0" VerticalAlignment="Top" Width="75" Click="btnApply_Click"/>
+        <TextBox x:Name="txtBoxReceivedData" HorizontalAlignment="Left" Height="245" Margin="145,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="531" MouseDoubleClick="txtBoxReceivedData_MouseDoubleClick"/>
+        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Margin="90,212,0,0" VerticalAlignment="Top" Width="40" Click="btnExit_Click"/>
+        <Rectangle x:Name="rectangleHeartBeat" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="20" Margin="90,128,0,0" Stroke="Black" VerticalAlignment="Top" Width="40"/>
+
+    </Grid>
+</Window>

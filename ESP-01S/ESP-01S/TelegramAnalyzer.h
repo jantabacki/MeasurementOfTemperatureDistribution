@@ -12,6 +12,7 @@
 
 class TelegramAnalyzer {
   private:
+    static WiFiClient client;
     static int visualisationDataPacketIterator;
     static byte visualisationDataPacket[VISUALISATION_DATA_SIZE];
     static void telegramTypeA(byte[], int);
