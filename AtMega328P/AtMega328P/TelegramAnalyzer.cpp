@@ -1,15 +1,5 @@
 #include "TelegramAnalyzer.h"
 
-LiquidCrystal595 TelegramAnalyzer::lcd(LCD_PIN_A, LCD_PIN_B, LCD_PIN_C);
-bool TelegramAnalyzer::wasDisplayInitialized = false;
-
-void TelegramAnalyzer::initDisplay(int x, int y) {
-  if (!wasDisplayInitialized) {
-    lcd.begin(x, y);
-    wasDisplayInitialized = true;
-  }
-}
-
 void TelegramAnalyzer::AnalyzeTelegram(byte inputArray[], int inputArraySize)
 {
   if (inputArray[0] == 1)
@@ -29,13 +19,11 @@ void TelegramAnalyzer::AnalyzeTelegram(byte inputArray[], int inputArraySize)
 //Display telegram received
 void TelegramAnalyzer::telegramTypeA(byte telegramBody[], int inputArraySize)
 {
-  initDisplay(16, 2);
   int displayPosX = 0;
   int displayPosY = 0;
   for (int i = 1; i < inputArraySize; i++) {
-    lcd.setCursor(displayPosX, displayPosY);
     if (telegramBody[i] != 0) {
-      lcd.print((char)telegramBody[i]);
+      StaticDisplay::WriteToDisplay(displayPosX, displayPosY, (char)telegramBody[i]);
       delay(1);
     }
     displayPosX++;

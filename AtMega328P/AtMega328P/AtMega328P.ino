@@ -1,5 +1,6 @@
 #include <InterruptTimer.h>
 #include "TelegramBuffer.h"
+#include "StaticDisplay.h"
 
 #define SHIFT_REGISTER_ENABLE_PIN 9
 #define MULTIPLEXER_ENABLE_PIN 5
@@ -66,6 +67,7 @@ void sendDataFromTermistorMatrix() {
 
 void setup() {
   Serial.begin(SERIAL_BAUD_RATE);
+  StaticDisplay::InitDisplay(16, 2);
   pinMode(SHIFT_REGISTER_ENABLE_PIN, OUTPUT);
   pinMode(MULTIPLEXER_ENABLE_PIN, OUTPUT);
   pinMode(TERMISTOR_MATRIX_OUTPUT_ANALOG_PIN, INPUT);
@@ -86,6 +88,8 @@ void setup() {
   Timer::EnableThread(&writeHeartBeatToLED);
   Timer::AddThread(&sendDataFromTermistorMatrix, 125);
   Timer::EnableThread(&sendDataFromTermistorMatrix);
+
+  StaticDisplay::WriteToDisplay(0, 1, "Device is ready");
 }
 
 void loop() {
@@ -93,4 +97,5 @@ void loop() {
     TelegramBuffer::AddByteToBuffer(Serial.read());
   }
   TelegramBuffer::CheckIfBufferContainsTelegram(35);
+
 }

@@ -7,15 +7,13 @@
 
 #include <Arduino.h>
 #include <LiquidCrystal595.h>
+#include "StaticDisplay.h"
 
 class TelegramAnalyzer {
   private:
     static void telegramTypeA(byte[], int);
     static void telegramTypeB(byte[], int);
-    static bool wasDisplayInitialized;
-    static void initDisplay(int, int);
   public:
-    static LiquidCrystal595 lcd;
     static void AnalyzeTelegram(byte[], int);
 };
 
