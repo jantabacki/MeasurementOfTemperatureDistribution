@@ -1,9 +1,9 @@
 #ifndef TelegramAnalyzer_h
 #define TelegramAnalyzer_h
 
-#define LCD_PIN_A 12
+#define LCD_PIN_A 10
 #define LCD_PIN_B 11
-#define LCD_PIN_C 10
+#define LCD_PIN_C 12
 
 #include <Arduino.h>
 #include <LiquidCrystal595.h>
