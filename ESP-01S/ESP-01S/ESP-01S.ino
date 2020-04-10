@@ -3,6 +3,7 @@
 #include <WiFiUdp.h>
 #include "TelegramBuffer.h"
 #include "InternalTime.h"
+#include <SoftwareSerial.h>
 
 #define SERIAL_BAUD_RATE 9600
 #define LOCAL_UDP_PORT 2390
@@ -11,6 +12,7 @@
 #define SIGNALING_LED 2
 
 Timer timer(2);
+SoftwareSerial serial(1, 3); //RX - TX (Standard [RX pin is 3] and [TX pin is 1])
 
 byte packetBuffer[48];
 WiFiUDP udp;
@@ -59,7 +61,7 @@ void writeHeartBeatToLCD() {
     checkSum += displayTelegramToSend[j];
   }
   displayTelegramToSend[34] = checkSum;
-  Serial.write(displayTelegramToSend, 35);
+  serial.write(displayTelegramToSend, 35);
 }
 
 bool getTimeFromServer() {
@@ -87,7 +89,9 @@ bool getTimeFromServer() {
 }
 
 void setup() {
-  Serial.begin(SERIAL_BAUD_RATE);
+  pinMode(1, FUNCTION_3);
+  pinMode(3, FUNCTION_3);
+  serial.begin(SERIAL_BAUD_RATE);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   pinMode(SIGNALING_LED, OUTPUT);
   udp.begin(LOCAL_UDP_PORT);
@@ -101,8 +105,8 @@ void setup() {
 }
 
 void loop() {
-  while (Serial.available()) {
-    TelegramBuffer::AddByteToBuffer(Serial.read());
+  while (serial.available()) {
+    TelegramBuffer::AddByteToBuffer(serial.read());
   }
   TelegramBuffer::CheckIfBufferContainsTelegram(20);
   timer.CheckThreads();
