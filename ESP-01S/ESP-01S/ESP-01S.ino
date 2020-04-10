@@ -91,6 +91,8 @@ bool getTimeFromServer() {
 void setup() {
   pinMode(1, FUNCTION_3);
   pinMode(3, FUNCTION_3);
+  pinMode(1, INPUT);
+  pinMode(3, OUTPUT);
   serial.begin(SERIAL_BAUD_RATE);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   pinMode(SIGNALING_LED, OUTPUT);
