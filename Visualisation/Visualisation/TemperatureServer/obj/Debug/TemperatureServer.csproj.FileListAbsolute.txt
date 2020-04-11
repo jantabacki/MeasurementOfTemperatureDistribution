@@ -9,3 +9,4 @@ C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\V
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\obj\Debug\TemperatureServer.csprojAssemblyReference.cache
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\bin\Debug\TemperatureIndication.dll
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\bin\Debug\TemperatureIndication.pdb
+C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\obj\Debug\TemperatureServer.csproj.CoreCompileInputs.cache

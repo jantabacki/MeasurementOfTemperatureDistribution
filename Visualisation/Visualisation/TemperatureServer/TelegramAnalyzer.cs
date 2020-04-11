@@ -40,12 +40,12 @@ namespace TemperatureServer
             byte[] byteTimeStamp = new byte[] { telegramBody[1], telegramBody[2], telegramBody[3], telegramBody[4] };
             uint NTPtimeStamp = BitConverter.ToUInt32(byteTimeStamp, 0);
             DateTime timeStamp = new DateTime(1900, 1, 1, 0, 0, 0).AddSeconds(NTPtimeStamp);
-            int posY = 0;
+            int posX = 0;
             for (int i = 7; i <= 22; i += 2)
             {
                 TemperatureIndication temperatureIndication = new TemperatureIndication(
-                timeStamp, telegramBody[6],
-                posY++,
+                timeStamp, posX++,
+                telegramBody[6],
                 BitConverter.ToInt16(new byte[] {
                     telegramBody[i+1],
                     telegramBody[i] }, 0));

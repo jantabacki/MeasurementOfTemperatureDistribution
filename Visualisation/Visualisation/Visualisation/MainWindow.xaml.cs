@@ -40,7 +40,7 @@ namespace Visualisation
 
         private void reinitializeDisplayElements()
         {
-            foreach (var displayElement in graphicalTemperatureIndications)
+            foreach (GraphicalTemperatureIndication displayElement in graphicalTemperatureIndications)
             {
                 mainCanvas.Children.Remove(displayElement.rectangle);
                 mainCanvas.Children.Remove(displayElement.textBlock);
