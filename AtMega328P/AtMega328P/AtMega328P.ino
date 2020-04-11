@@ -84,7 +84,7 @@ void setup() {
 
   Timer::AddThread(&writeHeartBeatToLED, 1000);
   Timer::EnableThread(&writeHeartBeatToLED);
-  Timer::AddThread(&sendDataFromTermistorMatrix, 125);
+  Timer::AddThread(&sendDataFromTermistorMatrix, 30);
   Timer::EnableThread(&sendDataFromTermistorMatrix);
 
   StaticDisplay::WriteToDisplay(0, 1, "Device is ready");
