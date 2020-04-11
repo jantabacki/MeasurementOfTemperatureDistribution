@@ -24,7 +24,6 @@ void TelegramAnalyzer::telegramTypeA(byte telegramBody[], int inputArraySize)
   for (int i = 1; i < inputArraySize; i++) {
     if (telegramBody[i] != 0) {
       StaticDisplay::WriteToDisplay(displayPosX, displayPosY, (char)telegramBody[i]);
-      delay(1);
     }
     displayPosX++;
     if (displayPosX >= 16) {

@@ -14,21 +14,17 @@
 #define SIGNALING_LED 13
 #define SERIAL_BAUD_RATE 9600
 
-int getValueFromTermistor(byte posX, byte posY) {
+int getValueFromTermistor(int posX, int posY) {
   digitalWrite(SHIFT_REGISTER_PIN_C, LOW);
-  byte posYtoShift = 1;
-  if (posY != 0) {
-    posYtoShift << posY;
-  }
-  shiftOut(SHIFT_REGISTER_PIN_A, SHIFT_REGISTER_PIN_B, MSBFIRST, posYtoShift << posY);
+  shiftOut(SHIFT_REGISTER_PIN_A, SHIFT_REGISTER_PIN_B, LSBFIRST, 1 << posX);
   digitalWrite(SHIFT_REGISTER_PIN_C, HIGH);
-  digitalWrite(TERMISTOR_MATRIX_OUTPUT_ADDRESS_A, posX & 0x01);
-  digitalWrite(TERMISTOR_MATRIX_OUTPUT_ADDRESS_B, (posX >> 1) & 0x01);
-  digitalWrite(TERMISTOR_MATRIX_OUTPUT_ADDRESS_C, (posX >> 2) & 0x01);
+  digitalWrite(TERMISTOR_MATRIX_OUTPUT_ADDRESS_A, posY & 0x01);
+  digitalWrite(TERMISTOR_MATRIX_OUTPUT_ADDRESS_B, (posY >> 1) & 0x01);
+  digitalWrite(TERMISTOR_MATRIX_OUTPUT_ADDRESS_C, (posY >> 2) & 0x01);
   return analogRead(TERMISTOR_MATRIX_OUTPUT_ANALOG_PIN);
 }
 
-bool LEDHeartBeatValue = false;
+volatile bool LEDHeartBeatValue = false;
 void writeHeartBeatToLED() {
   if (LEDHeartBeatValue) {
     digitalWrite(SIGNALING_LED, HIGH);
@@ -38,16 +34,17 @@ void writeHeartBeatToLED() {
   LEDHeartBeatValue = !LEDHeartBeatValue;
 }
 
-byte termistorMatrixIteratorX = 0;
+volatile int termistorMatrixIteratorY = 0;
 void sendDataFromTermistorMatrix() {
+  noInterrupts();
   byte bufferToSend[20];
   bufferToSend[0] = 20;
   bufferToSend[1] = 1;
-  bufferToSend[2] = termistorMatrixIteratorX;
+  bufferToSend[2] = termistorMatrixIteratorY;
   int bufferToSendIterator = 3;
   for (int i = 0; i <= 7; i++)
   {
-    int measuredValue = getValueFromTermistor(termistorMatrixIteratorX, i);
+    int measuredValue = getValueFromTermistor(i, termistorMatrixIteratorY);
     bufferToSend[bufferToSendIterator++] = highByte(measuredValue);
     bufferToSend[bufferToSendIterator++] = lowByte(measuredValue);
   }
@@ -57,12 +54,13 @@ void sendDataFromTermistorMatrix() {
     checkSum += bufferToSend[i];
   }
   bufferToSend[19] = checkSum;
-  termistorMatrixIteratorX++;
-  if (termistorMatrixIteratorX >= 8)
+  termistorMatrixIteratorY++;
+  if (termistorMatrixIteratorY > 7)
   {
-    termistorMatrixIteratorX = 0;
+    termistorMatrixIteratorY = 0;
   }
   Serial.write(bufferToSend, 20);
+  interrupts();
 }
 
 void setup() {
@@ -86,7 +84,7 @@ void setup() {
 
   Timer::AddThread(&writeHeartBeatToLED, 1000);
   Timer::EnableThread(&writeHeartBeatToLED);
-  Timer::AddThread(&sendDataFromTermistorMatrix, 30);
+  Timer::AddThread(&sendDataFromTermistorMatrix, 125);
   Timer::EnableThread(&sendDataFromTermistorMatrix);
 
   StaticDisplay::WriteToDisplay(0, 1, "Device is ready");
@@ -97,5 +95,4 @@ void loop() {
     TelegramBuffer::AddByteToBuffer(Serial.read());
   }
   TelegramBuffer::CheckIfBufferContainsTelegram(35);
-
 }
