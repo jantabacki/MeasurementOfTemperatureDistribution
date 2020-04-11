@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Timers;
 using System.Windows;
@@ -180,6 +181,7 @@ namespace Visualisation
                     reinitializeDisplayElements();
                     temperatureIndications = (List<TemperatureIndication>)formatter.Deserialize(stream);
                     stream.Close();
+                    temperatureIndications = temperatureIndications.OrderBy(temp => temp.DateTime).ToList();
                     mainSlider.Minimum = 0;
                     mainSlider.Maximum = temperatureIndications.Count - 1;
                     lblTimestamp.Content = "File loaded succesfully";
