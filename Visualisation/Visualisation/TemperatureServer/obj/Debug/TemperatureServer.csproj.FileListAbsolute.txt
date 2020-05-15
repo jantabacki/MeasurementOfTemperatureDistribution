@@ -10,3 +10,15 @@ C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\V
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\bin\Debug\TemperatureIndication.dll
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\bin\Debug\TemperatureIndication.pdb
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\obj\Debug\TemperatureServer.csproj.CoreCompileInputs.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\bin\Debug\TemperatureServer.exe.config
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\bin\Debug\TemperatureServer.exe
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\bin\Debug\TemperatureServer.pdb
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\bin\Debug\Logger.dll
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\bin\Debug\TemperatureIndication.dll
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\bin\Debug\Logger.pdb
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\bin\Debug\TemperatureIndication.pdb
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\obj\Debug\TemperatureServer.csprojAssemblyReference.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\obj\Debug\TemperatureServer.csproj.CoreCompileInputs.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\obj\Debug\TemperatureServer.csproj.CopyComplete
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\obj\Debug\TemperatureServer.exe
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\obj\Debug\TemperatureServer.pdb

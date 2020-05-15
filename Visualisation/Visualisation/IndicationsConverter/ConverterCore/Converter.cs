@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace IndicationsConverter.ConverterCore
@@ -20,7 +21,7 @@ namespace IndicationsConverter.ConverterCore
                 Console.WriteLine("Loading app.config file");
                 convertFunction = appSettings["function"];
                 Console.WriteLine("Test evaluation for provided function");
-                for (int i = 0; i <= 1023; i++) 
+                for (int i = 0; i <= 1023; i++)
                 {
                     convertValue(i);
                 }
@@ -28,7 +29,7 @@ namespace IndicationsConverter.ConverterCore
             }
             catch (Exception e)
             {
-                Console.ForegroundColor =ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("--- Critical error ---");
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Possible failures");
@@ -40,10 +41,18 @@ namespace IndicationsConverter.ConverterCore
             }
         }
 
-        public int convertValue(int value) 
+        public int convertValue(int value)
         {
-            var evalConvertFunction = convertFunction.Replace("x", value.ToString());
-            return Convert.ToInt32(new DataTable().Compute(evalConvertFunction, null));
+            string evalConvertFunction = convertFunction.Replace("x", (value + 1).ToString());
+            Regex reqex = new Regex(@"ln\((?:[^()]|(?<open> \( )|(?<-open> \) ))+(?(open)(?!))\)", RegexOptions.IgnorePatternWhitespace);
+            MatchCollection foundLogarithms = reqex.Matches(evalConvertFunction);
+            foreach (object foundLogarithm in foundLogarithms)
+            {
+                string beforeCalculationLog = foundLogarithm.ToString();
+                double valueInLogarithmCalculated = Convert.ToDouble(new DataTable().Compute(beforeCalculationLog.Replace("ln", ""), null));
+                evalConvertFunction = evalConvertFunction.Replace(beforeCalculationLog, Math.Log(valueInLogarithmCalculated).ToString());
+            }
+            return (int)Convert.ToDouble(new DataTable().Compute(evalConvertFunction.Replace(",", "."), null));
         }
     }
 }

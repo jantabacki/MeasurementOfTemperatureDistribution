@@ -3,3 +3,9 @@ C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\V
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Logger\obj\Debug\Logger.dll
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Logger\obj\Debug\Logger.pdb
 C:\Users\w7\Desktop\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Logger\obj\Debug\Logger.csproj.CoreCompileInputs.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Logger\bin\Debug\Logger.dll
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Logger\bin\Debug\Logger.pdb
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Logger\obj\Debug\Logger.csprojAssemblyReference.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Logger\obj\Debug\Logger.csproj.CoreCompileInputs.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Logger\obj\Debug\Logger.dll
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Logger\obj\Debug\Logger.pdb
