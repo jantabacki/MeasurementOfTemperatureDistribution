@@ -22,6 +22,7 @@ namespace Visualisation
         List<TemperatureIndication> temperatureIndications = new List<TemperatureIndication>();
         List<Color> colors = new List<Color>();
         Timer timer = new Timer(10);
+        int maxColorValue;
 
         public MainWindow()
         {
@@ -138,7 +139,7 @@ namespace Visualisation
                 TemperatureIndication selectedIndication = temperatureIndications[indicationPosition];
                 lblTimestamp.Content = selectedIndication.DateTime.ToString();
                 SolidColorBrush solidColorBrush = new SolidColorBrush();
-                solidColorBrush.Color = colors[ConvertFromAnalogToRGBValue(selectedIndication.Value, 0, 1023, 0, 764)];
+                solidColorBrush.Color = colors[ConvertFromAnalogToRGBValue(selectedIndication.Value, 0, maxColorValue, 0, 764)];
                 GraphicalTemperatureIndication displayElement = graphicalTemperatureIndications[selectedIndication.PosX, selectedIndication.PosY];
                 displayElement.rectangle.Fill = solidColorBrush;
                 mainCanvas.Children.Remove(displayElement.textBlock);
@@ -184,6 +185,7 @@ namespace Visualisation
                     temperatureIndications = temperatureIndications.OrderBy(temp => temp.DateTime).ToList();
                     mainSlider.Minimum = 0;
                     mainSlider.Maximum = temperatureIndications.Count - 1;
+                    maxColorValue = temperatureIndications.Aggregate((i1, i2) => i1.Value > i2.Value ? i1 : i2).Value;
                     lblTimestamp.Content = "File loaded succesfully";
                 }
             }
