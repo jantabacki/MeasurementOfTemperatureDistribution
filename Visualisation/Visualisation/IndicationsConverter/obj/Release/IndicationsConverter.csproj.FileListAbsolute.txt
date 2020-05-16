@@ -1,0 +1,8 @@
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Bin\IndicationsConverter.exe.config
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Bin\IndicationsConverter.exe
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Bin\IndicationsConverter.pdb
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\IndicationsConverter\obj\Release\IndicationsConverter.csprojAssemblyReference.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\IndicationsConverter\obj\Release\IndicationsConverter.csproj.CoreCompileInputs.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\IndicationsConverter\obj\Release\IndicationsConverter.csproj.CopyComplete
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\IndicationsConverter\obj\Release\IndicationsConverter.exe
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\IndicationsConverter\obj\Release\IndicationsConverter.pdb

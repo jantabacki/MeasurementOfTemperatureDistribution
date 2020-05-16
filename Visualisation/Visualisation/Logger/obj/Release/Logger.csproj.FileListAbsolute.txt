@@ -1,0 +1,6 @@
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Bin\Logger.dll
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Bin\Logger.pdb
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Logger\obj\Release\Logger.csprojAssemblyReference.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Logger\obj\Release\Logger.csproj.CoreCompileInputs.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Logger\obj\Release\Logger.dll
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Logger\obj\Release\Logger.pdb

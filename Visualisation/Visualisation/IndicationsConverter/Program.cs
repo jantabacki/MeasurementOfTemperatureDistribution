@@ -1,6 +1,7 @@
 ﻿using IndicationsConverter.ConverterCore;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using TemperatureIndicationLib;
 
 namespace IndicationsConverter
@@ -9,28 +10,28 @@ namespace IndicationsConverter
     {
         static void Main(string[] args)
         {
-            //string hihi = @"C:\Users\w7\Desktop\TemperatureServerSave_temp";
+            //string testPath = @"C:\Users\w7\Desktop\TemperatureServerSave_temp";
             List<TemperatureIndication> temperatureIndications = args[0].LoadRecord();
-            //List<TemperatureIndication> temperatureIndications = hihi.LoadRecord();
+            //List<TemperatureIndication> temperatureIndications = testPath.LoadRecord();
             List<TemperatureIndication> outputRecord = new List<TemperatureIndication>();
             Converter converter = new Converter();
+            var appConfig = ConfigurationManager.AppSettings;
             foreach (TemperatureIndication temperatureIndication in temperatureIndications)
             {
                 var convertedTemperature = converter.convertValue(temperatureIndication.Value);
-                if (convertedTemperature > 100)
+                if (convertedTemperature > int.Parse(appConfig["MaxValue"]))
                 {
-                    convertedTemperature = 100;
+                    convertedTemperature = int.Parse(appConfig["MaxValueConvertTo"]);
                 }
-                else if (convertedTemperature < 1)
+                else if (convertedTemperature < int.Parse(appConfig["MinValue"]))
                 {
-                    convertedTemperature = 0;
+                    convertedTemperature = int.Parse(appConfig["MinValueConvertTo"]);
                 }
                 TemperatureIndication modifiedRecord = new TemperatureIndication(temperatureIndication.DateTime, temperatureIndication.PosX, temperatureIndication.PosY, convertedTemperature);
                 outputRecord.Add(modifiedRecord);
             }
             outputRecord.SaveRecord(args[0] + "Converted");
-            //outputRecord.SaveRecord(hihi + "Converted");
-            Console.ReadLine();
+            //outputRecord.SaveRecord(testPath + "Converted");
         }
     }
 }

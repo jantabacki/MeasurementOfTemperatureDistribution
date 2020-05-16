@@ -1,0 +1,16 @@
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Bin\Visualisation.exe.config
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Bin\Visualisation.exe
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Bin\Visualisation.pdb
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Release\Visualisation.csprojAssemblyReference.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Release\MainWindow.g.cs
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Release\App.g.cs
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Release\Visualisation_MarkupCompile.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Release\Visualisation_MarkupCompile.lref
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Release\MainWindow.baml
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Release\Visualisation.g.resources
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Release\Visualisation.Properties.Resources.resources
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Release\Visualisation.csproj.GenerateResource.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Release\Visualisation.csproj.CoreCompileInputs.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Release\Visualisation.csproj.CopyComplete
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Release\Visualisation.exe
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\Visualisation\obj\Release\Visualisation.pdb

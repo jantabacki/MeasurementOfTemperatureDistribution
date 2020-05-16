@@ -1,0 +1,8 @@
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Bin\TemperatureServer.exe.config
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Bin\TemperatureServer.exe
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Bin\TemperatureServer.pdb
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\obj\Release\TemperatureServer.csprojAssemblyReference.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\obj\Release\TemperatureServer.csproj.CoreCompileInputs.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\obj\Release\TemperatureServer.csproj.CopyComplete
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\obj\Release\TemperatureServer.exe
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureServer\obj\Release\TemperatureServer.pdb

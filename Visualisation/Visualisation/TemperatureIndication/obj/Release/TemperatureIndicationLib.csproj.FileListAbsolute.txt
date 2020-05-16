@@ -1,0 +1,6 @@
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Bin\TemperatureIndication.dll
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Bin\TemperatureIndication.pdb
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureIndication\obj\Release\TemperatureIndicationLib.csprojAssemblyReference.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureIndication\obj\Release\TemperatureIndicationLib.csproj.CoreCompileInputs.cache
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureIndication\obj\Release\TemperatureIndication.dll
+C:\Users\w7\Desktop\MeasurementOfTemperatureDistribution\Visualisation\Visualisation\TemperatureIndication\obj\Release\TemperatureIndication.pdb
