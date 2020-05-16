@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -18,11 +19,13 @@ namespace Visualisation
     /// </summary>
     public partial class MainWindow : Window
     {
-        GraphicalTemperatureIndication[,] graphicalTemperatureIndications = new GraphicalTemperatureIndication[8, 8];
-        List<TemperatureIndication> temperatureIndications = new List<TemperatureIndication>();
-        List<Color> colors = new List<Color>();
-        Timer timer = new Timer(10);
-        int maxColorValue;
+        private readonly GraphicalTemperatureIndication[,] graphicalTemperatureIndications = new GraphicalTemperatureIndication[8, 8];
+        private List<TemperatureIndication> temperatureIndications = new List<TemperatureIndication>();
+        private readonly List<Color> colors = new List<Color>();
+        private readonly Timer timer = new Timer(10);
+        private int maxColorValue;
+        private int minColorValue;
+        private readonly string valueSuffix;
 
         public MainWindow()
         {
@@ -31,16 +34,20 @@ namespace Visualisation
             {
                 for (int j = 0; j <= 7; j++)
                 {
-                    graphicalTemperatureIndications[j, i] = new GraphicalTemperatureIndication();
-                    graphicalTemperatureIndications[j, i].rectangle = drawRectangle(j, i);
+                    graphicalTemperatureIndications[j, i] = new GraphicalTemperatureIndication
+                    {
+                        rectangle = DrawRectangle(j, i)
+                    };
                 }
             }
-            generatePalette();
-            timer.Elapsed += showNextValue;
+            GeneratePalette();
+            timer.Elapsed += ShowNextValue;
             timer.Enabled = false;
+            var appSettings = ConfigurationManager.AppSettings;
+            valueSuffix = appSettings["ValueSuffix"];
         }
 
-        private void reinitializeDisplayElements()
+        private void ReinitializeDisplayElements()
         {
             foreach (GraphicalTemperatureIndication displayElement in graphicalTemperatureIndications)
             {
@@ -51,8 +58,10 @@ namespace Visualisation
             {
                 for (int j = 0; j <= 7; j++)
                 {
-                    graphicalTemperatureIndications[j, i] = new GraphicalTemperatureIndication();
-                    graphicalTemperatureIndications[j, i].rectangle = drawRectangle(j, i);
+                    graphicalTemperatureIndications[j, i] = new GraphicalTemperatureIndication
+                    {
+                        rectangle = DrawRectangle(j, i)
+                    };
                 }
             }
             temperatureIndications.Clear();
@@ -63,7 +72,7 @@ namespace Visualisation
             previousSliderPosition = 0;
         }
 
-        private void showNextValue(object sender, ElapsedEventArgs e)
+        private void ShowNextValue(object sender, ElapsedEventArgs e)
         {
             mainSlider.Dispatcher.Invoke(() =>
             {
@@ -79,7 +88,7 @@ namespace Visualisation
             });
         }
 
-        private void generatePalette()
+        private void GeneratePalette()
         {
             byte R = 0;
             byte G = 255;
@@ -98,52 +107,56 @@ namespace Visualisation
             }
         }
 
-        Rectangle drawRectangle(int posX, int posY)
+        Rectangle DrawRectangle(int posX, int posY)
         {
             Rectangle rectangle = new Rectangle();
             Canvas.SetTop(rectangle, posY * 41);
             Canvas.SetLeft(rectangle, posX * 41);
             rectangle.Width = 40;
             rectangle.Height = 40;
-            SolidColorBrush solidColorBrush = new SolidColorBrush();
-            solidColorBrush.Color = Color.FromRgb(0, 0, 0);
+            SolidColorBrush solidColorBrush = new SolidColorBrush
+            {
+                Color = Color.FromRgb(0, 0, 0)
+            };
             rectangle.Fill = solidColorBrush;
             mainCanvas.Children.Add(rectangle);
             return rectangle;
         }
 
         int previousSliderPosition = 0;
-        private void mainSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void MainSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (previousSliderPosition < (int)mainSlider.Value)
             {
                 for (int i = previousSliderPosition; i <= (int)mainSlider.Value; i++)
                 {
-                    displayIndication(i);
+                    DisplayIndication(i);
                 }
             }
             else
             {
                 for (int i = previousSliderPosition; i >= (int)mainSlider.Value; i--)
                 {
-                    displayIndication(i);
+                    DisplayIndication(i);
                 }
             }
             previousSliderPosition = (int)mainSlider.Value;
         }
 
-        private void displayIndication(int indicationPosition)
+        private void DisplayIndication(int indicationPosition)
         {
             if (temperatureIndications.Count - 1 >= indicationPosition)
             {
                 TemperatureIndication selectedIndication = temperatureIndications[indicationPosition];
                 lblTimestamp.Content = selectedIndication.DateTime.ToString();
-                SolidColorBrush solidColorBrush = new SolidColorBrush();
-                solidColorBrush.Color = colors[ConvertFromAnalogToRGBValue(selectedIndication.Value, 0, maxColorValue, 0, 764)];
+                SolidColorBrush solidColorBrush = new SolidColorBrush
+                {
+                    Color = colors[ConvertFromAnalogToRGBValue(selectedIndication.Value, minColorValue, maxColorValue, 0, 764)]
+                };
                 GraphicalTemperatureIndication displayElement = graphicalTemperatureIndications[selectedIndication.PosX, selectedIndication.PosY];
                 displayElement.rectangle.Fill = solidColorBrush;
                 mainCanvas.Children.Remove(displayElement.textBlock);
-                displayElement.textBlock = Text(selectedIndication.PosX * 41 + 7, selectedIndication.PosY * 41 + 12, selectedIndication.Value.ToString(), Color.FromRgb(0, 0, 0));
+                displayElement.textBlock = Text(selectedIndication.PosX * 41 + 7, selectedIndication.PosY * 41 + 12, selectedIndication.Value.ToString() + valueSuffix, Color.FromRgb(0, 0, 0));
                 if (shouldShowValues)
                 {
                     mainCanvas.Children.Add(displayElement.textBlock);
@@ -158,15 +171,17 @@ namespace Visualisation
 
         private TextBlock Text(double x, double y, string text, Color color)
         {
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = text;
-            textBlock.Foreground = new SolidColorBrush(color);
+            TextBlock textBlock = new TextBlock
+            {
+                Text = text,
+                Foreground = new SolidColorBrush(color)
+            };
             Canvas.SetLeft(textBlock, x);
             Canvas.SetTop(textBlock, y);
             return textBlock;
         }
 
-        private void menuItemLoad_Click(object sender, RoutedEventArgs e)
+        private void MenuItemLoad_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -179,13 +194,14 @@ namespace Visualisation
                 {
                     FileStream stream = File.OpenRead(fileDialog.FileName);
                     BinaryFormatter formatter = new BinaryFormatter();
-                    reinitializeDisplayElements();
+                    ReinitializeDisplayElements();
                     temperatureIndications = (List<TemperatureIndication>)formatter.Deserialize(stream);
                     stream.Close();
                     temperatureIndications = temperatureIndications.OrderBy(temp => temp.DateTime).ToList();
                     mainSlider.Minimum = 0;
                     mainSlider.Maximum = temperatureIndications.Count - 1;
                     maxColorValue = temperatureIndications.Aggregate((i1, i2) => i1.Value > i2.Value ? i1 : i2).Value;
+                    minColorValue = temperatureIndications.Aggregate((i1, i2) => i1.Value < i2.Value ? i1 : i2).Value;
                     lblTimestamp.Content = "File loaded succesfully";
                 }
             }
@@ -195,13 +211,13 @@ namespace Visualisation
             }
         }
 
-        private void menuItemExit_Click(object sender, RoutedEventArgs e)
+        private void MenuItemExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
         bool shouldShowValues = false;
-        private void menuItemShowValues_Click(object sender, RoutedEventArgs e)
+        private void MenuItemShowValues_Click(object sender, RoutedEventArgs e)
         {
             shouldShowValues = true;
             foreach (var displayElement in graphicalTemperatureIndications)
@@ -214,7 +230,7 @@ namespace Visualisation
             }
         }
 
-        private void menuItemHideValues_Click(object sender, RoutedEventArgs e)
+        private void MenuItemHideValues_Click(object sender, RoutedEventArgs e)
         {
             shouldShowValues = false;
             foreach (var displayElement in graphicalTemperatureIndications)
@@ -223,17 +239,17 @@ namespace Visualisation
             }
         }
 
-        private void menuItemPlay_Click(object sender, RoutedEventArgs e)
+        private void MenuItemPlay_Click(object sender, RoutedEventArgs e)
         {
             timer.Enabled = true;
         }
 
-        private void menuItemReset_Click(object sender, RoutedEventArgs e)
+        private void MenuItemReset_Click(object sender, RoutedEventArgs e)
         {
             mainSlider.Value = 0;
         }
 
-        private void menuItemStop_Click(object sender, RoutedEventArgs e)
+        private void MenuItemStop_Click(object sender, RoutedEventArgs e)
         {
             timer.Enabled = false;
         }

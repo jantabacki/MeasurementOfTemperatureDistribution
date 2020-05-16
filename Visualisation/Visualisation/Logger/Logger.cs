@@ -9,7 +9,7 @@ namespace LoggerLib
 {
     public static class Logger
     {
-        private static object loggerPadlock = new object();
+        private static readonly object loggerPadlock = new object();
         private static string loggerFileName = string.Empty;
         private static List<LogType> logLevel = null;
 

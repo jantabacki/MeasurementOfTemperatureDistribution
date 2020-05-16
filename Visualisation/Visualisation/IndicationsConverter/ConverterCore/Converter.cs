@@ -18,11 +18,11 @@ namespace IndicationsConverter.ConverterCore
             convertFunction = appSettings["function"];
             for (int i = 0; i <= 1023; i++)
             {
-                convertValue(i);
+                ConvertValue(i);
             }
         }
 
-        public int convertValue(int value)
+        public int ConvertValue(int value)
         {
             string evalConvertFunction = convertFunction.Replace("x", (value + 1).ToString());
             Regex reqex = new Regex(@"ln\((?:[^()]|(?<open> \( )|(?<-open> \) ))+(?(open)(?!))\)", RegexOptions.IgnorePatternWhitespace);

@@ -14,8 +14,7 @@ namespace TemperatureServer
     class Server
     {
         TcpListener server = null;
-        static TelegramBuffer telegramBuffer = new TelegramBuffer();
-        bool exit = false;
+        static readonly TelegramBuffer telegramBuffer = new TelegramBuffer();
         public Thread CheckTelegramBuffer = new Thread(() =>
         {
             while (true)
@@ -53,7 +52,7 @@ namespace TemperatureServer
 
                     if (stream.DataAvailable)
                     {
-                        storeReceivedDataInTelegramBuffer(bytes, stream);
+                        StoreReceivedDataInTelegramBuffer(bytes, stream);
                     }
                     else
                     {
@@ -72,7 +71,7 @@ namespace TemperatureServer
             }
         }
 
-        private void storeReceivedDataInTelegramBuffer(byte[] bytes, NetworkStream stream)
+        private void StoreReceivedDataInTelegramBuffer(byte[] bytes, NetworkStream stream)
         {
             while (stream.Read(bytes, 0, bytes.Length) != 0)
             {

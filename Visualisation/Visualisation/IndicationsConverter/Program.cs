@@ -18,7 +18,7 @@ namespace IndicationsConverter
             var appConfig = ConfigurationManager.AppSettings;
             foreach (TemperatureIndication temperatureIndication in temperatureIndications)
             {
-                var convertedTemperature = converter.convertValue(temperatureIndication.Value);
+                var convertedTemperature = converter.ConvertValue(temperatureIndication.Value);
                 if (convertedTemperature > int.Parse(appConfig["MaxValue"]))
                 {
                     convertedTemperature = int.Parse(appConfig["MaxValueConvertTo"]);

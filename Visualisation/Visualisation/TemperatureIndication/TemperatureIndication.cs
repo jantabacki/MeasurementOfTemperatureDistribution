@@ -9,10 +9,10 @@ namespace TemperatureIndicationLib
     [Serializable]
     public class TemperatureIndication
     {
-        DateTime dateTime;
-        int posX;
-        int posY;
-        int value;
+        private readonly DateTime dateTime;
+        private readonly int posX;
+        private readonly int posY;
+        private readonly int value;
 
         public DateTime DateTime { get => dateTime; }
         public int PosX { get => posX; }
